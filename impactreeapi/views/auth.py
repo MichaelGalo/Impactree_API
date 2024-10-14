@@ -16,12 +16,12 @@ def login_user(request):
     Method arguments:
       request -- The full HTTP request object
     """
-    email = request.data["email"]
+    username = request.data["username"]
     password = request.data["password"]
 
     # Use the built-in authenticate method to verify
     # authenticate returns the user object or None if no user is found
-    authenticated_user = authenticate(username=email, password=password)
+    authenticated_user = authenticate(username=username, password=password)
 
     # If authentication was successful, respond with their token
     if authenticated_user is not None:
@@ -47,19 +47,21 @@ def register_user(request):
     first_name = request.data.get("first_name", None)
     last_name = request.data.get("last_name", None)
     password = request.data.get("password", None)
+    username = request.data.get("username", None)
 
     if (
         email is not None
         and first_name is not None
         and last_name is not None
         and password is not None
+        and username is not None
     ):
 
         try:
             # Create a new user by invoking the `create_user` helper method
             # on Django's built-in User model
             new_user = User.objects.create_user(
-                username=request.data["email"],
+                username=request.data["username"],
                 email=request.data["email"],
                 password=request.data["password"],
                 first_name=request.data["first_name"],
@@ -78,6 +80,8 @@ def register_user(request):
         return Response(data)
 
     return Response(
-        {"message": "You must provide email, password, first_name, and last_name"},
+        {
+            "message": "You must provide email, username, password, first_name, and last_name"
+        },
         status=status.HTTP_400_BAD_REQUEST,
     )
