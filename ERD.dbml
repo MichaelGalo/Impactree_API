@@ -1,0 +1,77 @@
+// Django User table (built-in)
+Table User {
+  id integer [primary key]
+  username varchar
+  first_name varchar
+  last_name varchar
+  email varchar
+  password varchar
+  // Other fields omitted for brevity
+}
+
+// Token table for authentication
+Table Token {
+  key varchar [primary key]
+  user_id integer [ref: - User.id]
+  created timestamp
+}
+
+// Profile table (extends User)
+Table Profile {
+  id integer [primary key]
+  user_id integer [ref: - User.id]
+  annual_income decimal
+  philanthropy_percentage decimal
+}
+
+// Charity Categories
+Table CharityCategory {
+  id integer [primary key]
+  name varchar
+}
+
+// Charity table
+Table Charity {
+  id integer [primary key]
+  name varchar
+  category_id integer [ref: > CharityCategory.id]
+  description text
+  impact_per_dollar decimal
+  avg_people_impacted_per_year integer
+}
+
+// Donation table
+Table Donation {
+  id integer [primary key]
+  user_id integer [ref: > User.id]
+  charity_id integer [ref: > Charity.id]
+  amount decimal
+  donation_date date
+}
+
+// TreeMilestone table
+Table TreeMilestone {
+  id integer [primary key]
+  name varchar
+  description text
+  required_impact_points integer
+  image_url varchar
+}
+
+// UserTreeProgress table
+Table UserTreeProgress {
+  id integer [primary key]
+  user_id integer [ref: - User.id]
+  current_milestone_id integer [ref: > TreeMilestone.id]
+  impact_points integer
+  progress_to_next_stage decimal
+}
+
+// Relationships
+Ref: Token.user_id - User.id
+Ref: Profile.user_id - User.id
+Ref: Charity.category_id > CharityCategory.id
+Ref: Donation.user_id > User.id
+Ref: Donation.charity_id > Charity.id
+Ref: UserTreeProgress.user_id - User.id
+Ref: UserTreeProgress.current_milestone_id > TreeMilestone.id
