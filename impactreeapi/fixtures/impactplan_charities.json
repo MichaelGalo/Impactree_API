@@ -1,0 +1,65 @@
+[
+    {
+      "model": "impactreeapi.impactplancharity",
+      "pk": 1,
+      "fields": {
+        "impact_plan": 1,
+        "charity": 1,
+        "allocation_amount": "1500.00"
+      }
+    },
+    {
+      "model": "impactreeapi.impactplancharity",
+      "pk": 2,
+      "fields": {
+        "impact_plan": 1,
+        "charity": 2,
+        "allocation_amount": "1250.00"
+      }
+    },
+    {
+      "model": "impactreeapi.impactplancharity",
+      "pk": 3,
+      "fields": {
+        "impact_plan": 1,
+        "charity": 3,
+        "allocation_amount": "1000.00"
+      }
+    },
+    {
+      "model": "impactreeapi.impactplancharity",
+      "pk": 4,
+      "fields": {
+        "impact_plan": 2,
+        "charity": 4,
+        "allocation_amount": "3000.00"
+      }
+    },
+    {
+      "model": "impactreeapi.impactplancharity",
+      "pk": 5,
+      "fields": {
+        "impact_plan": 2,
+        "charity": 5,
+        "allocation_amount": "4000.00"
+      }
+    },
+    {
+      "model": "impactreeapi.impactplancharity",
+      "pk": 6,
+      "fields": {
+        "impact_plan": 2,
+        "charity": 6,
+        "allocation_amount": "5000.00"
+      }
+    },
+    {
+      "model": "impactreeapi.impactplancharity",
+      "pk": 7,
+      "fields": {
+        "impact_plan": 3,
+        "charity": 7,
+        "allocation_amount": "1000.00"
+      }
+    }
+  ]

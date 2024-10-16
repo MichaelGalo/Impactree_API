@@ -1,0 +1,38 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "johndoe",
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "johndoe@example.com",
+            "password": "Admin8*",
+            "is_staff": false
+        }
+        },
+        {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "username": "brenda",
+            "first_name": "Brenda",
+            "last_name": "Smith",
+            "email": "brendasmith@example.com",
+            "password": "Admin8*",
+            "is_staff": false
+        }
+        },
+        {
+        "model": "auth.user",
+        "pk": 3,
+        "fields": {
+            "username": "bobross",
+            "first_name": "Bob",
+            "last_name": "Ross",
+            "email": "bobross@example.com",
+            "password": "Admin8*",
+            "is_staff": true
+        }
+    }
+]

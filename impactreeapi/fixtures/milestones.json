@@ -1,0 +1,122 @@
+[
+    {
+      "model": "impactreeapi.milestone",
+      "pk": 1,
+      "fields": {
+        "name": "Seed Planter",
+        "description": "You've taken the first step in making a difference!",
+        "required_percentage": "1.00",
+        "image_url": "https://example.com/seed_planter.jpg"
+      }
+    },
+    {
+      "model": "impactreeapi.milestone",
+      "pk": 2,
+      "fields": {
+        "name": "Sprout Nurturer",
+        "description": "Your impact is starting to grow!",
+        "required_percentage": "5.00",
+        "image_url": "https://example.com/sprout_nurturer.jpg"
+      }
+    },
+    {
+      "model": "impactreeapi.milestone",
+      "pk": 3,
+      "fields": {
+        "name": "Sapling Supporter",
+        "description": "Your efforts are taking root!",
+        "required_percentage": "10.00",
+        "image_url": "https://example.com/sapling_supporter.jpg"
+      }
+    },
+    {
+      "model": "impactreeapi.milestone",
+      "pk": 4,
+      "fields": {
+        "name": "Timber Tender",
+        "description": "You're fostering real change!",
+        "required_percentage": "15.00",
+        "image_url": "https://example.com/timber_tender.jpg"
+      }
+    },
+    {
+      "model": "impactreeapi.milestone",
+      "pk": 5,
+      "fields": {
+        "name": "Community Gardener",
+        "description": "You're cultivating a community of change!",
+        "required_percentage": "20.00",
+        "image_url": "https://example.com/community_gardener.jpg"
+      }
+    },
+    {
+      "model": "impactreeapi.milestone",
+      "pk": 6,
+      "fields": {
+        "name": "Canopy Creator",
+        "description": "Your impact is reaching new heights!",
+        "required_percentage": "25.00",
+        "image_url": "https://example.com/canopy_creator.jpg"
+      }
+    },
+    {
+      "model": "impactreeapi.milestone",
+      "pk": 7,
+      "fields": {
+        "name": "Grove Steward",
+        "description": "You're nurturing a diverse ecosystem of change!",
+        "required_percentage": "30.00",
+        "image_url": "https://example.com/grove_steward.jpg"
+      }
+    },
+    {
+      "model": "impactreeapi.milestone",
+      "pk": 8,
+      "fields": {
+        "name": "Orchard Keeper",
+        "description": "Your efforts are bearing fruit!",
+        "required_percentage": "45.00",
+        "image_url": "https://example.com/orchard_keeper.jpg"
+      }
+    },
+    {
+      "model": "impactreeapi.milestone",
+      "pk": 9,
+      "fields": {
+        "name": "Forest Founder",
+        "description": "Your contributions can be felt stretching across the land",
+        "required_percentage": "60.00",
+        "image_url": "https://example.com/forest_founder.jpg"
+      }
+    },
+    {
+      "model": "impactreeapi.milestone",
+      "pk": 10,
+      "fields": {
+        "name": "Biome Builder",
+        "description": "Your impact is transforming entire ecosystems!",
+        "required_percentage": "75.00",
+        "image_url": "https://example.com/biome_builder.jpg"
+      }
+    },
+    {
+      "model": "impactreeapi.milestone",
+      "pk": 11,
+      "fields": {
+        "name": "Evergreen Changer",
+        "description": "Your commitment to change is unwavering and enduring!",
+        "required_percentage": "90.00",
+        "image_url": "https://example.com/evergreen_changer.jpg"
+      }
+    },
+    {
+      "model": "impactreeapi.milestone",
+      "pk": 12,
+      "fields": {
+        "name": "Redwood Legacy",
+        "description": "You're creating a lasting legacy of change!",
+        "required_percentage": "100.00",
+        "image_url": "https://example.com/redwood_legacy.jpg"
+      }
+    }
+  ]

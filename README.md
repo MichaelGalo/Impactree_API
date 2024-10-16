@@ -15,6 +15,7 @@ Impactree_API is a Django RESTful API using the Django Rest Framework. It serves
 
 - Implement a RESTful API using Django and Django Rest Framework
 - Design and implement a database schema for tracking donations and user progress
+- Test-Driven Development through automated integration tests
 - Integrate user authentication and authorization
 - Apply best practices for data modeling and API design
 
