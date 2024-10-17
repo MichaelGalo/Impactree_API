@@ -6,6 +6,7 @@ Table User {
   last_name varchar
   email varchar
   password varchar
+  is_staff bool
   // Other fields omitted for brevity
 }
 
@@ -16,12 +17,14 @@ Table Token {
   created timestamp
 }
 
-// Profile table (extends User)
-Table Profile {
+// ImpactPlan table
+Table ImpactPlan {
   id integer [primary key]
   user_id integer [ref: - User.id]
   annual_income decimal
   philanthropy_percentage decimal
+  total_annual_allocation decimal
+  current_milestone_id integer [ref: > Milestone.id]
 }
 
 // Charity Categories
@@ -36,42 +39,34 @@ Table Charity {
   name varchar
   category_id integer [ref: > CharityCategory.id]
   description text
-  impact_per_dollar decimal
-  avg_people_impacted_per_year integer
+  impact_metric varchar
+  // "impact_metric": "people given water access"
+  impact_ratio float
+  //     "impact_ratio": 0.05,  # This means $1 provides clean water access to 0.05 people, or $20 per person
+  website url
 }
 
-// Donation table
-Table Donation {
+// ImpactPlanCharity table
+Table ImpactPlanCharity {
   id integer [primary key]
-  user_id integer [ref: > User.id]
+  impact_plan_id integer [ref: > ImpactPlan.id]
   charity_id integer [ref: > Charity.id]
-  amount decimal
-  donation_date date
+  allocation_amount decimal
 }
 
-// TreeMilestone table
-Table TreeMilestone {
+// Milestone table
+Table Milestone {
   id integer [primary key]
   name varchar
   description text
-  required_impact_points integer
+  required_percentage decimal
   image_url varchar
-}
-
-// UserTreeProgress table
-Table UserTreeProgress {
-  id integer [primary key]
-  user_id integer [ref: - User.id]
-  current_milestone_id integer [ref: > TreeMilestone.id]
-  impact_points integer
-  progress_to_next_stage decimal
 }
 
 // Relationships
 Ref: Token.user_id - User.id
-Ref: Profile.user_id - User.id
+Ref: ImpactPlan.user_id - User.id
+Ref: ImpactPlan.current_milestone_id > Milestone.id
 Ref: Charity.category_id > CharityCategory.id
-Ref: Donation.user_id > User.id
-Ref: Donation.charity_id > Charity.id
-Ref: UserTreeProgress.user_id - User.id
-Ref: UserTreeProgress.current_milestone_id > TreeMilestone.id
+Ref: ImpactPlanCharity.impact_plan_id > ImpactPlan.id
+Ref: ImpactPlanCharity.charity_id > Charity.id

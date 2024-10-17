@@ -1,0 +1,72 @@
+[
+    {
+      "model": "impactreeapi.charitycategory",
+      "pk": 1,
+      "fields": {
+        "name": "Water and Sanitation"
+      }
+    },
+    {
+      "model": "impactreeapi.charitycategory",
+      "pk": 2,
+      "fields": {
+        "name": "Housing"
+      }
+    },
+    {
+      "model": "impactreeapi.charitycategory",
+      "pk": 3,
+      "fields": {
+        "name": "Hunger Relief"
+      }
+    },
+    {
+      "model": "impactreeapi.charitycategory",
+      "pk": 4,
+      "fields": {
+        "name": "Homeless Support"
+      }
+    },
+    {
+      "model": "impactreeapi.charitycategory",
+      "pk": 5,
+      "fields": {
+        "name": "Healthcare"
+      }
+    },
+    {
+      "model": "impactreeapi.charitycategory",
+      "pk": 6,
+      "fields": {
+        "name": "Disaster Relief"
+      }
+    },
+    {
+      "model": "impactreeapi.charitycategory",
+      "pk": 7,
+      "fields": {
+        "name": "Education"
+      }
+    },
+    {
+      "model": "impactreeapi.charitycategory",
+      "pk": 8,
+      "fields": {
+        "name": "Arts"
+      }
+    },
+    {
+      "model": "impactreeapi.charitycategory",
+      "pk": 9,
+      "fields": {
+        "name": "Environment"
+      }
+    },
+    {
+      "model": "impactreeapi.charitycategory",
+      "pk": 10,
+      "fields": {
+        "name": "Community Engagement"
+      }
+    }
+  ]

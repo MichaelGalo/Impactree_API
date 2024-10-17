@@ -1,0 +1,86 @@
+[
+    {
+      "model": "impactreeapi.charity",
+      "pk": 1,
+      "fields": {
+        "name": "Second Harvest",
+        "category": 3,
+        "description": "Second Harvest is a food bank that works to end hunger through community partnerships, food rescue, and distribution to those in need.",
+        "impact_metric": "Meals provided",
+        "impact_ratio": 4.0,
+        "website_url": "https://www.secondharvestmidtn.org/about-us/"
+      }
+    },
+    {
+      "model": "impactreeapi.charity",
+      "pk": 2,
+      "fields": {
+        "name": "Charity Water",
+        "category": 1,
+        "description": "Charity Water is a non-profit organization bringing clean and safe drinking water to people in developing countries.",
+        "impact_metric": "People served with clean water for a year",
+        "impact_ratio": 0.3,
+        "website_url": "https://www.charitywater.org"
+      }
+    },
+    {
+      "model": "impactreeapi.charity",
+      "pk": 3,
+      "fields": {
+        "name": "Water for People",
+        "category": 1,
+        "description": "Water for People is working to create a world where everyone has access to safe water and sanitation services that last forever.",
+        "impact_metric": "People served with clean water for a year",
+        "impact_ratio": 0.0333,
+        "website_url": "https://www.waterforpeople.org"
+      }
+    },
+    {
+      "model": "impactreeapi.charity",
+      "pk": 4,
+      "fields": {
+        "name": "Blood:Water",
+        "category": 1,
+        "description": "Blood: Water partners with African grassroots organizations to address the HIV/AIDS and water crises.",
+        "impact_metric": "People served with clean water & HIV/AIDS support for a year",
+        "impact_ratio": 0.25,
+        "website_url": "https://www.bloodwater.org"
+      }
+    },
+    {
+      "model": "impactreeapi.charity",
+      "pk": 5,
+      "fields": {
+        "name": "YMCA",
+        "category": 10,
+        "description": "The YMCA is a worldwide organization that offers a wide variety of programs aimed at youth development, healthy living, and social responsibility.",
+        "impact_metric": "People served across all programs",
+        "impact_ratio": 0.0222,
+        "website_url": "https://www.ymca.net"
+      }
+    },
+    {
+      "model": "impactreeapi.charity",
+      "pk": 6,
+      "fields": {
+        "name": "Habitat for Humanity",
+        "category": 2,
+        "description": "Habitat for Humanity is a nonprofit organization that helps families build and improve places to call home.",
+        "impact_metric": "Families served with new or improved housing",
+        "impact_ratio": 0.0001333,
+        "website_url": "https://www.habitat.org"
+      }
+    },
+    {
+      "model": "impactreeapi.charity",
+      "pk": 7,
+      "fields": {
+        "name": "World Central Kitchen",
+        "category": 6,
+        "description": "World Central Kitchen is a non-profit organization devoted to providing meals in the wake of natural disasters and other crises.",
+        "impact_metric": "Meals served in disaster areas",
+        "impact_ratio": 4.0,
+        "website_url": "https://wck.org"
+      }
+    }
+  ]

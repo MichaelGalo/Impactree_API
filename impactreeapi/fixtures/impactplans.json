@@ -1,0 +1,35 @@
+[
+    {
+        "model": "impactreeapi.impactplan",
+        "pk": 1,
+        "fields": {
+          "user": 1,
+          "annual_income": "75000.00",
+          "philanthropy_percentage": "5.00",
+          "total_annual_allocation": "3750.00",
+          "current_milestone": 2
+        }
+      },
+      {
+        "model": "impactreeapi.impactplan",
+        "pk": 2,
+        "fields": {
+          "user": 2,
+          "annual_income": "120000.00",
+          "philanthropy_percentage": "10.00",
+          "total_annual_allocation": "12000.00",
+          "current_milestone": 3
+        }
+      },
+      {
+        "model": "impactreeapi.impactplan",
+        "pk": 3,
+        "fields": {
+          "user": 3,
+          "annual_income": "50000.00",
+          "philanthropy_percentage": "1.00",
+          "total_annual_allocation": "1000.00",
+          "current_milestone": 1
+        }
+      }
+]
