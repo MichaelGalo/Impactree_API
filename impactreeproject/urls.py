@@ -10,6 +10,7 @@ router = routers.DefaultRouter(trailing_slash=False)
 router.register(r"users", UserViewSet, "user")
 router.register(r"milestones", MilestoneViewSet, "milestone")
 router.register(r"charitycategories", CharityCategoryViewSet, "charitycategories")
+router.register(r"charities", CharityViewSet, "charities")
 
 urlpatterns = [
     path("", include(router.urls)),

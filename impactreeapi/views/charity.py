@@ -5,7 +5,7 @@ from rest_framework.viewsets import ViewSet
 from impactreeapi.models import Charity
 
 
-class CharityView(ViewSet):
+class CharityViewSet(ViewSet):
     """Charity view set"""
 
     def create(self, request):
