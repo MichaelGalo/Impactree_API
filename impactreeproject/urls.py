@@ -7,7 +7,7 @@ from rest_framework import routers
 
 
 router = routers.DefaultRouter(trailing_slash=False)
-# router.register(r"rocks", RockView, "rock")
+router.register(r"users", UserViewSet, "user")
 
 urlpatterns = [
     path("", include(router.urls)),

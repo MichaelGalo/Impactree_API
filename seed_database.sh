@@ -12,4 +12,3 @@ python3 manage.py loaddata impactplans
 python3 manage.py loaddata charitycategories
 python3 manage.py loaddata charities
 python3 manage.py loaddata impactplan_charities
-
