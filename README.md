@@ -59,9 +59,14 @@ Impactree_API is a Django RESTful API using the Django Rest Framework. It serves
 
 7. Access the API at `http://localhost:8000`
 
-## API Endpoints
-
-(Return & List API endpoints here)
+## API Endpoints (MVP)
+- register
+- login
+- users
+- milestones
+- charitycategories
+- charities
+- impactplans
 
 ## Data Models
 
