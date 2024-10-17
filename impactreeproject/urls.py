@@ -9,6 +9,7 @@ from rest_framework import routers
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r"users", UserViewSet, "user")
 router.register(r"milestones", MilestoneViewSet, "milestone")
+router.register(r"charitycategories", CharityCategoryViewSet, "charitycategories")
 
 urlpatterns = [
     path("", include(router.urls)),
