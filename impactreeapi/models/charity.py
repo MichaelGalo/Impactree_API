@@ -9,7 +9,7 @@ class Charity(models.Model):
     description = models.TextField()
     impact_metric = models.CharField(max_length=255)
     impact_ratio = models.FloatField()
-    website = models.URLField()
+    website_url = models.URLField()
 
     def __str__(self):
         return self.name
