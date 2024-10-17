@@ -1,12 +1,27 @@
 from django.http import HttpResponseServerError
-from rest_framework import serializers, status
+from rest_framework import serializers, status, permissions
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from impactreeapi.models import Charity
+from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
+
+
+class IsAdminUserOrReadOnly(IsAuthenticatedOrReadOnly):
+    """
+    Custom permission class to allow read-only access to non-admin users
+    and full access to admin users.
+    """
+
+    def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        return request.user and request.user.is_staff
 
 
 class CharityViewSet(ViewSet):
     """Charity view set"""
+
+    permission_classes = [IsAdminUserOrReadOnly]
 
     def create(self, request):
         """Handle POST operations
