@@ -21,6 +21,16 @@ class ImpactPlanViewSet(ViewSet):
     def create(self, request):
         """Handle POST operations"""
         try:
+            user = User.objects.get(pk=request.data["user"])
+
+            # Check if the user already has an impact plan
+            existing_plan = ImpactPlan.objects.filter(user=user).first()
+            if existing_plan:
+                return Response(
+                    {"message": "User already has an impact plan."},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+
             impact_plan = ImpactPlan()
             impact_plan.user = User.objects.get(pk=request.data["user"])
             impact_plan.annual_income = request.data["annual_income"]
@@ -57,6 +67,15 @@ class ImpactPlanViewSet(ViewSet):
         """Handle PUT requests"""
         try:
             impact_plan = ImpactPlan.objects.get(pk=pk)
+
+            # Check if the update is trying to change the user
+            if "user" in request.data and request.data["user"] != impact_plan.user.id:
+                return Response(
+                    {
+                        "message": "Cannot change the user associated with an impact plan."
+                    },
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
             impact_plan.annual_income = request.data.get(
                 "annual_income", impact_plan.annual_income
             )
