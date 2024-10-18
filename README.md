@@ -45,13 +45,16 @@ Impactree_API is a Django RESTful API using the Django Rest Framework. It serves
 
 4. Set up & seed the database:
     ```sh
-   rm db.sqlite3
-    rm -rf ./impactreeapi/migrations
     python3 manage.py migrate
     python3 manage.py makemigrations impactreeapi
     python3 manage.py migrate impactreeapi
     python3 manage.py loaddata users
     python3 manage.py loaddata tokens
+    python3 manage.py loaddata milestones
+    python3 manage.py loaddata impactplans
+    python3 manage.py loaddata charitycategories
+    python3 manage.py loaddata charities
+    python3 manage.py loaddata impactplan_charities
 
 6. Run the development server:
     ```sh
