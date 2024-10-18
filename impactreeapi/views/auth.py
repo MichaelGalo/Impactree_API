@@ -27,7 +27,18 @@ def login_user(request):
     if authenticated_user is not None:
         token = Token.objects.get(user=authenticated_user)
 
-        data = {"valid": True, "token": token.key}
+        data = {
+            "valid": True,
+            "token": token.key,
+            "user": {
+                "id": authenticated_user.id,
+                "username": authenticated_user.username,
+                "email": authenticated_user.email,
+                "first_name": authenticated_user.first_name,
+                "last_name": authenticated_user.last_name,
+                "is_staff": authenticated_user.is_staff,
+            },
+        }
         return Response(data)
     else:
         # Bad login details were provided. So we can't log the user in.
@@ -76,7 +87,17 @@ def register_user(request):
         # Use the REST Framework's token generator on the new user account
         token = Token.objects.create(user=new_user)
         # Return the token to the client
-        data = {"token": token.key}
+        data = {
+            "token": token.key,
+            "user": {
+                "id": new_user.id,
+                "username": new_user.username,
+                "email": new_user.email,
+                "first_name": new_user.first_name,
+                "last_name": new_user.last_name,
+                "is_staff": new_user.is_staff,
+            },
+        }
         return Response(data)
 
     return Response(
