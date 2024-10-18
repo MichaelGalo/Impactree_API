@@ -18,15 +18,7 @@ Impactree_API is a Django RESTful API using the Django Rest Framework. It serves
 - Test-Driven Development through automated integration tests
 - Integrate user authentication and authorization
 - Apply best practices for data modeling and API design
-
-## Project Goals
-
-1. Implement user authentication using Django's token-based authentication system
-2. Allow customers to delete their own data while preventing access to others' data
-3. Enable customers to edit their own data while restricting access to others' information
-4. Utilize Django as the major framework for the project
-5. Create a scalable and maintainable API structure
-6. Implement proper data validation and error handling
+- Implement proper data validation and error handling
 
 ## Installation Instructions
 
@@ -76,12 +68,12 @@ Impactree_API is a Django RESTful API using the Django Rest Framework. It serves
 The project includes the following main models:
 
 - User (Django's built-in user model)
-- Profile (extends User with additional fields)
+- Tokens (Django's built-in tokens)
+- ImpactPlan
 - CharityCategory
 - Charity
-- Donation
-- TreeMilestone
-- UserTreeProgress
+- ImpactPlanCharity (many-to-many join table)
+- Milestone
 
 For a detailed view of the data structure, please refer to the ERD (Entity-Relationship Diagram) in the project documentation.
 
