@@ -4,6 +4,8 @@ from rest_framework import routers
 from impactreeapi.views import *
 from django.conf.urls import include
 from rest_framework import routers
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 router = routers.DefaultRouter(trailing_slash=False)
@@ -18,4 +20,4 @@ urlpatterns = [
     path("register", register_user),
     path("login", login_user),
     path("admin/", admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
