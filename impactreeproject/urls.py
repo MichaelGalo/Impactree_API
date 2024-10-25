@@ -14,6 +14,9 @@ router.register(r"milestones", MilestoneViewSet, "milestone")
 router.register(r"charitycategories", CharityCategoryViewSet, "charitycategories")
 router.register(r"charities", CharityViewSet, "charities")
 router.register(r"impactplans", ImpactPlanViewSet, "impactplans")
+router.register(
+    r"impactplan_charities", ImpactPlanCharityViewSet, "impactplan_charities"
+)
 
 urlpatterns = [
     path("", include(router.urls)),
