@@ -135,7 +135,15 @@ class ImpactPlanViewTests(TestCase):
         response = self.client.put(
             f"/impactplans/{impact_plan.id}", updated_data, format="json"
         )
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # Verify response data
+        self.assertEqual(response.data["annual_income"], "75000.00")
+        self.assertEqual(response.data["philanthropy_percentage"], "5.00")
+        self.assertEqual(response.data["total_annual_allocation"], "3750.00")
+        self.assertEqual(len(response.data["charities"]), 1)
+        self.assertEqual(response.data["charities"][0]["allocation_amount"], "3750.00")
+
+        # Verify database was updated
         impact_plan.refresh_from_db()
         self.assertEqual(impact_plan.annual_income, 75000.00)
         self.assertEqual(impact_plan.philanthropy_percentage, 5.00)
@@ -196,7 +204,9 @@ class ImpactPlanViewTests(TestCase):
         response = self.client.put(
             f"/impactplans/{impact_plan.id}", updated_data, format="json"
         )
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(
+            response.status_code, status.HTTP_200_OK
+        )  # Changed from 204 to 200
 
         # Verify charities were removed
         response = self.client.get(f"/impactplans/{impact_plan.id}")

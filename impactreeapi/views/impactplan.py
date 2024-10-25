@@ -119,7 +119,8 @@ class ImpactPlanViewSet(ViewSet):
                         allocation_amount=charity_data["allocation_amount"],
                     )
 
-            return Response(None, status=status.HTTP_204_NO_CONTENT)
+            serializer = ImpactPlanSerializer(impact_plan)
+            return Response(serializer.data)
         except ImpactPlan.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         except Exception as ex:
