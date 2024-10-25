@@ -58,6 +58,4 @@ class AuthTests(TestCase):
         self.assertEqual(user["first_name"], self.user_data["first_name"])
         self.assertEqual(user["last_name"], self.user_data["last_name"])
         self.assertIn("is_staff", user)
-        self.assertFalse(user["is_staff"])  # Assuming the user is not staff
-
-    # ... rest of the test methods remain the same
+        self.assertFalse(user["is_staff"])
