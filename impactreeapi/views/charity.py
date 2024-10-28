@@ -4,6 +4,9 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from impactreeapi.models import Charity
 from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
+import uuid
+import base64
+from django.core.files.base import ContentFile
 
 
 class IsAdminUserOrReadOnly(IsAuthenticatedOrReadOnly):
@@ -30,6 +33,14 @@ class CharityViewSet(ViewSet):
             Response -- JSON serialized instance
         """
         charity = Charity()
+
+        if "image" in request.data and request.data["image"]:
+            format, imgstr = request.data["image"].split(";base64,")
+            ext = format.split("/")[-1]
+            charity.image = ContentFile(
+                base64.b64decode(imgstr), name=f"charity-{uuid.uuid4()}.{ext}"
+            )
+
         charity.name = request.data["name"]
         charity.description = request.data["description"]
         charity.impact_metric = request.data["impact_metric"]
@@ -72,6 +83,14 @@ class CharityViewSet(ViewSet):
         """
         try:
             charity = Charity.objects.get(pk=pk)
+
+            if "image" in request.data and request.data["image"]:
+                format, imgstr = request.data["image"].split(";base64,")
+                ext = format.split("/")[-1]
+                charity.image = ContentFile(
+                    base64.b64decode(imgstr), name=f"charity-{uuid.uuid4()}.{ext}"
+                )
+
             charity.name = request.data["name"]
             charity.description = request.data["description"]
             charity.impact_metric = request.data["impact_metric"]
@@ -136,5 +155,6 @@ class CharitySerializer(serializers.ModelSerializer):
             "impact_metric",
             "impact_ratio",
             "website_url",
+            "image",
         )
         depth = 1

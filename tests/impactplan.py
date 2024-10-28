@@ -3,7 +3,13 @@ from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 from rest_framework.authtoken.models import Token
 from rest_framework import status
-from impactreeapi.models import ImpactPlan, Milestone
+from impactreeapi.models import (
+    ImpactPlan,
+    Milestone,
+    Charity,
+    ImpactPlanCharity,
+    CharityCategory,
+)
 
 
 class ImpactPlanViewTests(TestCase):
@@ -27,11 +33,33 @@ class ImpactPlanViewTests(TestCase):
             image_url="https://example.com/image.jpg",
         )
 
+        # Create charity category first
+        self.charity_category = CharityCategory.objects.create(name="Test Category")
+
+        self.charity1 = Charity.objects.create(
+            name="Test Charity 1",
+            category=self.charity_category,
+            description="Test charity 1 description",
+            impact_metric="people helped",
+            impact_ratio=0.5,
+        )
+        self.charity2 = Charity.objects.create(
+            name="Test Charity 2",
+            category=self.charity_category,
+            description="Test charity 2 description",
+            impact_metric="meals provided",
+            impact_ratio=1.0,
+        )
+
         self.impact_plan_data = {
             "user": self.user.id,  # Keep this as user ID for API requests
             "annual_income": 100000.00,
             "philanthropy_percentage": 5.00,
             "total_annual_allocation": 5000.00,
+            "charities": [
+                {"charity_id": self.charity1.id, "allocation_amount": 2500.00},
+                {"charity_id": self.charity2.id, "allocation_amount": 2500.00},
+            ],
         }
 
         # Create a separate dict for direct ORM operations
@@ -53,6 +81,7 @@ class ImpactPlanViewTests(TestCase):
         self.assertEqual(new_plan.philanthropy_percentage, 5.00)
         self.assertEqual(new_plan.total_annual_allocation, 5000.00)
         self.assertEqual(new_plan.current_milestone, self.milestone)
+        self.assertEqual(new_plan.impactplancharity_set.count(), 2)
 
     def test_create_duplicate_impact_plan(self):
         # First, create an impact plan
@@ -72,6 +101,14 @@ class ImpactPlanViewTests(TestCase):
     def test_retrieve_impact_plan(self):
         # Create an impact plan first
         impact_plan = ImpactPlan.objects.create(**self.impact_plan_orm_data)
+        # Add charities to the plan
+        ImpactPlanCharity.objects.create(
+            impact_plan=impact_plan, charity=self.charity1, allocation_amount=2500.00
+        )
+        ImpactPlanCharity.objects.create(
+            impact_plan=impact_plan, charity=self.charity2, allocation_amount=2500.00
+        )
+
         response = self.client.get(f"/impactplans/{impact_plan.id}")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["annual_income"], "100000.00")
@@ -81,6 +118,8 @@ class ImpactPlanViewTests(TestCase):
         self.assertEqual(response.data["user"]["first_name"], "Test")
         self.assertEqual(response.data["user"]["last_name"], "User")
         self.assertEqual(response.data["user"]["is_staff"], False)
+        self.assertEqual(len(response.data["charities"]), 2)
+        self.assertEqual(response.data["charities"][0]["allocation_amount"], "2500.00")
 
     def test_update_impact_plan(self):
         # Create an impact plan first
@@ -93,7 +132,13 @@ class ImpactPlanViewTests(TestCase):
         response = self.client.put(
             f"/impactplans/{impact_plan.id}", updated_data, format="json"
         )
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # Verify response data
+        self.assertEqual(response.data["annual_income"], "75000.00")
+        self.assertEqual(response.data["philanthropy_percentage"], "5.00")
+        self.assertEqual(response.data["total_annual_allocation"], "3750.00")
+
+        # Verify database was updated
         impact_plan.refresh_from_db()
         self.assertEqual(impact_plan.annual_income, 75000.00)
         self.assertEqual(impact_plan.philanthropy_percentage, 5.00)
@@ -102,7 +147,11 @@ class ImpactPlanViewTests(TestCase):
 
     def test_list_impact_plans(self):
         # Create an impact plan first
-        ImpactPlan.objects.create(**self.impact_plan_orm_data)
+        impact_plan = ImpactPlan.objects.create(**self.impact_plan_orm_data)
+        ImpactPlanCharity.objects.create(
+            impact_plan=impact_plan, charity=self.charity1, allocation_amount=5000.00
+        )
+
         response = self.client.get("/impactplans")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
@@ -113,10 +162,21 @@ class ImpactPlanViewTests(TestCase):
         self.assertEqual(response.data[0]["user"]["first_name"], "Test")
         self.assertEqual(response.data[0]["user"]["last_name"], "User")
         self.assertEqual(response.data[0]["user"]["is_staff"], False)
+        self.assertEqual(len(response.data[0]["charities"]), 1)
+        self.assertEqual(
+            response.data[0]["charities"][0]["allocation_amount"], "5000.00"
+        )
 
     def test_delete_impact_plan(self):
         # Create an impact plan first
         impact_plan = ImpactPlan.objects.create(**self.impact_plan_orm_data)
+        ImpactPlanCharity.objects.create(
+            impact_plan=impact_plan, charity=self.charity1, allocation_amount=2500.00
+        )
+
         response = self.client.delete(f"/impactplans/{impact_plan.id}")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(ImpactPlan.objects.count(), 0)
+        self.assertEqual(
+            ImpactPlanCharity.objects.count(), 0
+        )  # Verify cascading delete

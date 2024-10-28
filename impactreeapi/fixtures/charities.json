@@ -66,8 +66,8 @@
         "name": "Habitat for Humanity",
         "category": 2,
         "description": "Habitat for Humanity is a nonprofit organization that helps families build and improve places to call home.",
-        "impact_metric": "Families served with new or improved housing",
-        "impact_ratio": 0.0001333,
+        "impact_metric": "Houses constructed",
+        "impact_ratio": 0.00001,
         "website_url": "https://www.habitat.org"
       }
     },
@@ -79,8 +79,33 @@
         "category": 6,
         "description": "World Central Kitchen is a non-profit organization devoted to providing meals in the wake of natural disasters and other crises.",
         "impact_metric": "Meals served in disaster areas",
-        "impact_ratio": 4.0,
+        "impact_ratio": 0.4,
         "website_url": "https://wck.org"
       }
+    },
+    {
+      "model": "impactreeapi.charity",
+      "pk": 8,
+      "fields": {
+        "name": "Nashville Rescue Mission",
+        "category": 4,
+        "description": "Nashville Rescue Mission is a Christ-centered community committed to helping those who are hungry, hurting, and experiencing homelessness by providing programs and services that focus on a person’s entire life—physical, mental, spiritual, emotional, and social.",
+        "impact_metric": "Meals served",
+        "impact_ratio": 0.35,
+        "website_url": "https://nashvillerescuemission.org/"
+      }
+    },
+    {
+      "model": "impactreeapi.charity",
+      "pk": 9,
+      "fields": {
+        "name": "The Nature Conservancy",
+        "category": 9,
+        "description": "The Nature Conservancy is a global environmental nonprofit working to conserve the lands and waters on which all life depends.",
+        "impact_metric": "Acres of land or water protected",
+        "impact_ratio": 0.00002,
+        "website_url": "https://www.nature.org"
+      }
     }
+    
   ]

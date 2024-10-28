@@ -34,6 +34,9 @@ class CharityViewSetTests(TestCase):
             category=self.category,
         )
 
+        # Create a test image
+        self.sample_image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+
         self.charity_data = {
             "name": "New Charity",
             "description": "New Description",
@@ -95,4 +98,13 @@ class CharityViewSetTests(TestCase):
         self.client.force_authenticate(user=self.admin_user)
         url = f"/charities/{self.charity.id}"
         response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_update_charity_image_as_admin(self):
+        """Test that an admin user can update a charity's image"""
+        self.client.force_authenticate(user=self.admin_user)
+        url = f"/charities/{self.charity.id}"
+        data = self.charity_data.copy()
+        data["image"] = self.sample_image
+        response = self.client.put(url, data)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

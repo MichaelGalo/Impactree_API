@@ -3,7 +3,7 @@ from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from django.contrib.auth.models import User
-from impactreeapi.models import ImpactPlan, Milestone
+from impactreeapi.models import ImpactPlan, Milestone, ImpactPlanCharity
 from django.db.models import Max
 
 
@@ -47,6 +47,16 @@ class ImpactPlanViewSet(ViewSet):
             )
 
             impact_plan.save()
+
+            # Handle charity allocations if provided
+            charities_data = request.data.get("charities", [])
+            for charity_data in charities_data:
+                ImpactPlanCharity.objects.create(
+                    impact_plan=impact_plan,
+                    charity_id=charity_data["charity_id"],
+                    allocation_amount=charity_data["allocation_amount"],
+                )
+
             serializer = ImpactPlanSerializer(impact_plan)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except Exception as ex:
@@ -55,7 +65,9 @@ class ImpactPlanViewSet(ViewSet):
     def retrieve(self, request, pk=None):
         """Handle GET requests for single ImpactPlan"""
         try:
-            impact_plan = ImpactPlan.objects.get(pk=pk)
+            impact_plan = ImpactPlan.objects.prefetch_related(
+                "impactplancharity_set", "impactplancharity_set__charity"
+            ).get(pk=pk)
             serializer = ImpactPlanSerializer(impact_plan)
             return Response(serializer.data)
         except ImpactPlan.DoesNotExist:
@@ -93,7 +105,9 @@ class ImpactPlanViewSet(ViewSet):
                 )
 
             impact_plan.save()
-            return Response(None, status=status.HTTP_204_NO_CONTENT)
+
+            serializer = ImpactPlanSerializer(impact_plan)
+            return Response(serializer.data)
         except ImpactPlan.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         except Exception as ex:
@@ -115,7 +129,9 @@ class ImpactPlanViewSet(ViewSet):
     def list(self, request):
         """Handle GET requests for all ImpactPlans"""
         try:
-            impact_plans = ImpactPlan.objects.all()
+            impact_plans = ImpactPlan.objects.prefetch_related(
+                "impactplancharity_set", "impactplancharity_set__charity"
+            ).all()
             serializer = ImpactPlanSerializer(impact_plans, many=True)
             return Response(serializer.data)
         except Exception as ex:
@@ -137,10 +153,22 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
 
+class ImpactPlanCharitySerializer(serializers.ModelSerializer):
+    """JSON serializer for ImpactPlanCharity"""
+
+    class Meta:
+        model = ImpactPlanCharity
+        fields = ("id", "charity", "allocation_amount")
+        depth = 1
+
+
 class ImpactPlanSerializer(serializers.ModelSerializer):
     """JSON serializer for ImpactPlan"""
 
     user = UserSerializer(many=False)
+    charities = ImpactPlanCharitySerializer(
+        source="impactplancharity_set", many=True, read_only=True
+    )
 
     class Meta:
         model = ImpactPlan
@@ -151,5 +179,6 @@ class ImpactPlanSerializer(serializers.ModelSerializer):
             "philanthropy_percentage",
             "total_annual_allocation",
             "current_milestone",
+            "charities",
         )
         depth = 1
