@@ -128,9 +128,6 @@ class ImpactPlanViewTests(TestCase):
             "annual_income": 75000.00,
             "philanthropy_percentage": 5.00,
             "total_annual_allocation": 3750.00,
-            "charities": [
-                {"charity_id": self.charity1.id, "allocation_amount": 3750.00}
-            ],
         }
         response = self.client.put(
             f"/impactplans/{impact_plan.id}", updated_data, format="json"
@@ -140,8 +137,6 @@ class ImpactPlanViewTests(TestCase):
         self.assertEqual(response.data["annual_income"], "75000.00")
         self.assertEqual(response.data["philanthropy_percentage"], "5.00")
         self.assertEqual(response.data["total_annual_allocation"], "3750.00")
-        self.assertEqual(len(response.data["charities"]), 1)
-        self.assertEqual(response.data["charities"][0]["allocation_amount"], "3750.00")
 
         # Verify database was updated
         impact_plan.refresh_from_db()
@@ -149,10 +144,6 @@ class ImpactPlanViewTests(TestCase):
         self.assertEqual(impact_plan.philanthropy_percentage, 5.00)
         self.assertEqual(impact_plan.total_annual_allocation, 3750.00)
         self.assertEqual(impact_plan.current_milestone, self.milestone)
-        self.assertEqual(impact_plan.impactplancharity_set.count(), 1)
-        self.assertEqual(
-            impact_plan.impactplancharity_set.first().allocation_amount, 3750.00
-        )
 
     def test_list_impact_plans(self):
         # Create an impact plan first
@@ -189,25 +180,3 @@ class ImpactPlanViewTests(TestCase):
         self.assertEqual(
             ImpactPlanCharity.objects.count(), 0
         )  # Verify cascading delete
-
-    def test_update_impact_plan_remove_all_charities(self):
-        """Test removing all charities from an impact plan"""
-        # Create plan with charities first
-        impact_plan = ImpactPlan.objects.create(**self.impact_plan_orm_data)
-        ImpactPlanCharity.objects.create(
-            impact_plan=impact_plan, charity=self.charity1, allocation_amount=2500.00
-        )
-
-        # Update to remove all charities
-        updated_data = {"charities": []}
-
-        response = self.client.put(
-            f"/impactplans/{impact_plan.id}", updated_data, format="json"
-        )
-        self.assertEqual(
-            response.status_code, status.HTTP_200_OK
-        )  # Changed from 204 to 200
-
-        # Verify charities were removed
-        response = self.client.get(f"/impactplans/{impact_plan.id}")
-        self.assertEqual(len(response.data["charities"]), 0)

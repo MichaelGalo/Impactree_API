@@ -106,19 +106,6 @@ class ImpactPlanViewSet(ViewSet):
 
             impact_plan.save()
 
-            # This section handles charity updates
-            charities_data = request.data.get("charities")
-            if charities_data is not None:
-                # Clear existing relationships
-                impact_plan.impactplancharity_set.all().delete()
-                # Create new ones
-                for charity_data in charities_data:
-                    ImpactPlanCharity.objects.create(
-                        impact_plan=impact_plan,
-                        charity_id=charity_data["charity_id"],
-                        allocation_amount=charity_data["allocation_amount"],
-                    )
-
             serializer = ImpactPlanSerializer(impact_plan)
             return Response(serializer.data)
         except ImpactPlan.DoesNotExist:
