@@ -26,7 +26,7 @@
         "name": "Sapling Supporter",
         "description": "Your efforts are taking root!",
         "required_percentage": "10.00",
-        "image_filename": "sapling-supporter"
+        "image_filename": "sapling-supporter.png"
       }
     },
     {
