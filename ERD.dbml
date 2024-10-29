@@ -44,6 +44,7 @@ Table Charity {
   impact_ratio float
   //     "impact_ratio": 0.05,  # This means $1 provides clean water access to 0.05 people, or $20 per person
   website url
+  image varchar
 }
 
 // ImpactPlanCharity table
@@ -60,7 +61,7 @@ Table Milestone {
   name varchar
   description text
   required_percentage decimal
-  image_url varchar
+  image_filename varchar
 }
 
 // Relationships
