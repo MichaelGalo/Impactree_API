@@ -15,17 +15,18 @@ class MilestoneViewSetTests(TestCase):
         self.user = User.objects.create_user(username="testuser", password="testpass")
         self.client.force_authenticate(user=self.user)
 
+        # Updated to use image_filename instead of image_url
         self.milestone1 = Milestone.objects.create(
             name="Test Milestone 1",
             description="Description for Test Milestone 1",
             required_percentage=50.00,
-            image_url="http://example.com/image1.jpg",
+            image_filename="seed-planter.png",  # Using actual filename from your public folder
         )
         self.milestone2 = Milestone.objects.create(
             name="Test Milestone 2",
             description="Description for Test Milestone 2",
             required_percentage=75.00,
-            image_url="http://example.com/image2.jpg",
+            image_filename="sprout-nurturer.png",  # Using actual filename from your public folder
         )
 
     def test_list_milestones(self):
@@ -46,4 +47,7 @@ class MilestoneViewSetTests(TestCase):
             float(response.data["required_percentage"]),
             self.milestone1.required_percentage,
         )
-        self.assertEqual(response.data["image_url"], self.milestone1.image_url)
+        # Updated to check image_filename instead of image_url
+        self.assertEqual(
+            response.data["image_filename"], self.milestone1.image_filename
+        )
