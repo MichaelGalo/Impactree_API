@@ -5,7 +5,7 @@ from impactreeapi.models import Milestone
 class MilestoneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Milestone
-        fields = ["id", "name", "description", "required_percentage", "image_url"]
+        fields = ["id", "name", "description", "required_percentage", "image_filename"]
 
 
 class MilestoneViewSet(viewsets.ModelViewSet):

@@ -6,7 +6,7 @@
         "name": "Seed Planter",
         "description": "You've taken the first step in making a difference!",
         "required_percentage": "1.00",
-        "image_url": "https://example.com/seed_planter.jpg"
+        "image_filename": "seed-planter.png"
       }
     },
     {
@@ -16,7 +16,7 @@
         "name": "Sprout Nurturer",
         "description": "Your impact is starting to grow!",
         "required_percentage": "5.00",
-        "image_url": "https://example.com/sprout_nurturer.jpg"
+        "image_filename": "sprout-nurturer.png"
       }
     },
     {
@@ -26,7 +26,7 @@
         "name": "Sapling Supporter",
         "description": "Your efforts are taking root!",
         "required_percentage": "10.00",
-        "image_url": "https://example.com/sapling_supporter.jpg"
+        "image_filename": "sapling-supporter.png"
       }
     },
     {
@@ -36,7 +36,7 @@
         "name": "Timber Tender",
         "description": "You're fostering real change!",
         "required_percentage": "15.00",
-        "image_url": "https://example.com/timber_tender.jpg"
+        "image_filename": "timber-tender.png"
       }
     },
     {
@@ -46,7 +46,7 @@
         "name": "Community Gardener",
         "description": "You're cultivating a community of change!",
         "required_percentage": "20.00",
-        "image_url": "https://example.com/community_gardener.jpg"
+        "image_filename": "community-gardener.png"
       }
     },
     {
@@ -56,7 +56,7 @@
         "name": "Canopy Creator",
         "description": "Your impact is reaching new heights!",
         "required_percentage": "25.00",
-        "image_url": "https://example.com/canopy_creator.jpg"
+        "image_filename": "canopy-creator.png"
       }
     },
     {
@@ -66,7 +66,7 @@
         "name": "Grove Steward",
         "description": "You're nurturing a diverse ecosystem of change!",
         "required_percentage": "30.00",
-        "image_url": "https://example.com/grove_steward.jpg"
+        "image_filename": "grove-steward.png"
       }
     },
     {
@@ -76,7 +76,7 @@
         "name": "Orchard Keeper",
         "description": "Your efforts are bearing fruit!",
         "required_percentage": "45.00",
-        "image_url": "https://example.com/orchard_keeper.jpg"
+        "image_filename": "orchard-keeper.png"
       }
     },
     {
@@ -86,7 +86,7 @@
         "name": "Forest Founder",
         "description": "Your contributions can be felt stretching across the land",
         "required_percentage": "60.00",
-        "image_url": "https://example.com/forest_founder.jpg"
+        "image_filename": "forest-founder.png"
       }
     },
     {
@@ -96,7 +96,7 @@
         "name": "Biome Builder",
         "description": "Your impact is transforming entire ecosystems!",
         "required_percentage": "75.00",
-        "image_url": "https://example.com/biome_builder.jpg"
+        "image_filename": "biome-builder.png"
       }
     },
     {
@@ -106,7 +106,7 @@
         "name": "Evergreen Changer",
         "description": "Your commitment to change is unwavering and enduring!",
         "required_percentage": "90.00",
-        "image_url": "https://example.com/evergreen_changer.jpg"
+        "image_filename": "evergreen-changer.png"
       }
     },
     {
@@ -116,7 +116,7 @@
         "name": "Redwood Legacy",
         "description": "You're creating a lasting legacy of change!",
         "required_percentage": "100.00",
-        "image_url": "https://example.com/redwood_legacy.jpg"
+        "image_filename": "redwood-legacy.png"
       }
     }
   ]

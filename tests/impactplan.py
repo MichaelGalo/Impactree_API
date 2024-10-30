@@ -30,7 +30,7 @@ class ImpactPlanViewTests(TestCase):
             name="Test Milestone",
             description="A test milestone",
             required_percentage=5.00,
-            image_url="https://example.com/image.jpg",
+            image_filename="test-image.png",
         )
 
         # Create charity category first
