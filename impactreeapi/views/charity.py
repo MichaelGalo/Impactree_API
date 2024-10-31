@@ -76,32 +76,38 @@ class CharityViewSet(ViewSet):
             return Response({"reason": ex.args[0]}, status=status.HTTP_400_BAD_REQUEST)
 
     def update(self, request, pk=None):
-        """Handle PUT requests
-
-        Returns:
-            Response -- Empty body with 204 status code
-        """
+        """Handle PUT requests"""
         try:
             charity = Charity.objects.get(pk=pk)
 
             if "image" in request.data and request.data["image"]:
-                format, imgstr = request.data["image"].split(";base64,")
-                ext = format.split("/")[-1]
-                charity.image = ContentFile(
-                    base64.b64decode(imgstr), name=f"charity-{uuid.uuid4()}.{ext}"
-                )
+                # Only process if it's a new base64 image
+                if request.data["image"].startswith("data:"):
+                    format, imgstr = request.data["image"].split(";base64,")
+                    ext = format.split("/")[-1]
+                    charity.image = ContentFile(
+                        base64.b64decode(imgstr), name=f"charity-{uuid.uuid4()}.{ext}"
+                    )
+                # If it's a media URL path, just preserve the existing image
+                elif request.data["image"].startswith("/media/"):
+                    pass  # Keep existing image, no processing needed
 
-            charity.name = request.data["name"]
-            charity.description = request.data["description"]
-            charity.impact_metric = request.data["impact_metric"]
-            charity.impact_ratio = request.data["impact_ratio"]
-            charity.website_url = request.data["website_url"]
-
+            if "name" in request.data:
+                charity.name = request.data["name"]
+            if "description" in request.data:
+                charity.description = request.data["description"]
+            if "impact_metric" in request.data:
+                charity.impact_metric = request.data["impact_metric"]
+            if "impact_ratio" in request.data:
+                charity.impact_ratio = request.data["impact_ratio"]
+            if "website_url" in request.data:
+                charity.website_url = request.data["website_url"]
             if "category" in request.data:
                 charity.category_id = request.data["category"]
 
             charity.save()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
+
         except Charity.DoesNotExist:
             return Response(
                 {"message": "Charity not found"}, status=status.HTTP_404_NOT_FOUND
