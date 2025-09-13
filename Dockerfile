@@ -12,17 +12,14 @@ RUN pip install --no-cache-dir pipenv && pipenv install --deploy --system
 
 COPY . .
 
-RUN mkdir -p /app/data
-VOLUME /app/data
-
 ENV PORT=8080
 ENV DJANGO_SETTINGS_MODULE=impactreeproject.settings
-ENV SQLITE_DB_PATH=/app/data/db.sqlite3
+ENV SQLITE_DB_PATH=/app/db.sqlite3
 
 EXPOSE 8080
 
 CMD bash -c '\
-if [ ! -f /app/data/db.sqlite3 ]; then \
+if [ ! -f /app/db.sqlite3 ]; then \
     python manage.py migrate --noinput; \
     python manage.py loaddata users tokens milestones impactplans charitycategories charities impactplan_charities; \
 fi; \
