@@ -7,7 +7,6 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-
 COPY Pipfile Pipfile.lock ./
 RUN pip install --no-cache-dir pipenv && pipenv install --deploy --system
 
@@ -22,4 +21,9 @@ ENV SQLITE_DB_PATH=/app/data/db.sqlite3
 
 EXPOSE 8080
 
-CMD ["gunicorn", "--bind", ":8080", "impactreeproject.wsgi:application"]
+CMD bash -c '\
+if [ ! -f /app/data/db.sqlite3 ]; then \
+    python manage.py migrate --noinput; \
+    python manage.py loaddata users tokens milestones impactplans charitycategories charities impactplan_charities; \
+fi; \
+exec gunicorn impactreeproject.wsgi:application --bind :$PORT'
